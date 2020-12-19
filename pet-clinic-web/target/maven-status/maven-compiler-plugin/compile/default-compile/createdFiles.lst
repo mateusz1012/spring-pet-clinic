@@ -1,1 +1,5 @@
+example\spring\project\springpetclinic\bootstrap\DataLoader.class
 example\spring\project\springpetclinic\SpringPetClinicApplication.class
+example\spring\project\springpetclinic\controllers\OwnerController.class
+example\spring\project\springpetclinic\controllers\VetController.class
+example\spring\project\springpetclinic\controllers\IndexController.class
