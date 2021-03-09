@@ -1,2 +1,2 @@
-# spring-pet-clinic
+# Spring Pet Clinic
 Pet Clinic Project
