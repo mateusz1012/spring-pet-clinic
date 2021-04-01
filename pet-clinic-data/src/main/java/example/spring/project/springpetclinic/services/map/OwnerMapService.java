@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Profile({"default", "map"})
@@ -44,7 +45,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
                             pet.setPetType(petTypeService.save(pet.getPetType()));
                         }
 
-                    } else  {
+                    } else {
                         throw new RuntimeException("Pet Type is required");
                     }
 
@@ -74,17 +75,20 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner findByLastName(String lastName) {
+
         return this.findAll()
-                .stream()
-                .filter(owner -> owner.getLastName().equalsIgnoreCase(lastName))
-                .findFirst()
-                .orElse(null);
+          .stream()
+          .filter(owner -> owner.getLastName().equalsIgnoreCase(lastName))
+          .findFirst()
+          .orElse(null);
     }
 
     @Override
     public List<Owner> findAllByLastNameLike(String lastName) {
 
-        //todo - impl
-        return null;
+        return this.findAll()
+          .stream()
+          .filter(owner -> owner.getLastName().toLowerCase().contains(lastName.toLowerCase()))
+          .collect(Collectors.toList());
     }
 }

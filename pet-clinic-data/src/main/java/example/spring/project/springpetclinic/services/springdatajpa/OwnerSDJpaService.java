@@ -2,8 +2,6 @@ package example.spring.project.springpetclinic.services.springdatajpa;
 
 import example.spring.project.springpetclinic.model.Owner;
 import example.spring.project.springpetclinic.repositories.OwnerRepository;
-import example.spring.project.springpetclinic.repositories.PetRepository;
-import example.spring.project.springpetclinic.repositories.PetTypeRepository;
 import example.spring.project.springpetclinic.services.OwnerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -17,14 +15,9 @@ import java.util.Set;
 public class OwnerSDJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
-    private final PetRepository petRepository;
-    private final PetTypeRepository petTypeRepository;
 
-    public OwnerSDJpaService(OwnerRepository ownerRepository, PetRepository petRepository,
-                             PetTypeRepository petTypeRepository) {
+    public OwnerSDJpaService(OwnerRepository ownerRepository) {
         this.ownerRepository = ownerRepository;
-        this.petRepository = petRepository;
-        this.petTypeRepository = petTypeRepository;
     }
 
     @Override
@@ -34,7 +27,7 @@ public class OwnerSDJpaService implements OwnerService {
 
     @Override
     public List<Owner> findAllByLastNameLike(String lastName) {
-        return ownerRepository.findAllByLastNameLike(lastName);
+        return ownerRepository.findAllByLastNameLikeIgnoreCase("%" + lastName + "%");
     }
 
     @Override
